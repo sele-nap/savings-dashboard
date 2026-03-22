@@ -27,25 +27,24 @@ export default function Navbar() {
   return (
     <nav className="bg-white border-b border-gray-100 sticky top-0 z-10">
       <div className="mx-auto max-w-4xl px-4 flex items-center justify-between h-14">
-        <Link href="/" className="text-base font-bold text-gray-900 tracking-tight">
-          {t('title')}
-        </Link>
-
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
+          <Link href="/" className="text-base font-bold text-gray-900 tracking-tight">
+            {t('title')}
+          </Link>
           <button
             onClick={switchLocale}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-gray-200 text-xs font-semibold text-gray-600 hover:border-indigo-400 hover:text-indigo-600 transition-all"
+            className="w-10 h-7 flex items-center justify-center rounded-full border border-gray-200 text-xs font-semibold text-gray-600 hover:border-indigo-400 hover:text-indigo-600 transition-all"
           >
-            🌐 {t('lang')}
-          </button>
-
-          <button
-            onClick={handleLogout}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gray-100 text-xs font-semibold text-gray-600 hover:bg-red-50 hover:text-red-500 transition-all"
-          >
-            ↪ {t('logout')}
+            {t('lang')}
           </button>
         </div>
+
+        <button
+          onClick={handleLogout}
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gray-100 text-xs font-semibold text-gray-600 hover:bg-red-50 hover:text-red-500 transition-all"
+        >
+          ↪ {t('logout')}
+        </button>
       </div>
     </nav>
   );

@@ -37,8 +37,14 @@ export default function TransactionHistory() {
       transition={{ duration: 0.4, delay: 0.3 }}
       className="rounded-2xl bg-white shadow-sm overflow-hidden"
     >
-      <div className="px-6 py-4 border-b border-gray-100">
-        <h2 className="text-sm font-semibold text-gray-700">Historique des transactions</h2>
+      <div className="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
+        <h2 className="text-sm font-semibold text-gray-700">Versements</h2>
+        <a
+          href="/deposit"
+          className="text-xs font-medium px-3 py-1.5 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 transition-colors"
+        >
+          Nouveau
+        </a>
       </div>
       <ul className="divide-y divide-gray-100">
         {transactions.map((tx) => {

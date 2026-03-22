@@ -5,6 +5,7 @@ import rateLimit from 'express-rate-limit';
 import dotenv from 'dotenv';
 
 import connectDB from './config/db';
+import authRouter from './routes/auth';
 import fundsRouter from './routes/funds';
 import transactionsRouter from './routes/transactions';
 import portfolioRouter from './routes/portfolio';
@@ -15,7 +16,7 @@ const app = express();
 const PORT = process.env.PORT || 5001;
 
 app.use(helmet());
-app.use(cors({ origin: 'http://localhost:3000' }));
+app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 app.use(
   rateLimit({
     windowMs: 15 * 60 * 1000,
@@ -26,6 +27,7 @@ app.use(
 
 app.use(express.json());
 
+app.use('/api/auth', authRouter);
 app.use('/api/funds', fundsRouter);
 app.use('/api/transactions', transactionsRouter);
 app.use('/api/portfolio', portfolioRouter);

@@ -73,15 +73,18 @@ export const getPortfolioHistory = async (_req: Request, res: Response): Promise
 
     const firstTxDate = transactions[0].date.toISOString().split('T')[0];
     const today = new Date().toISOString().split('T')[0];
+    const lastValuationDate = sortedDates.at(-1) ?? today;
+    const chartStart = firstTxDate <= lastValuationDate ? firstTxDate : lastValuationDate;
 
     const history = sortedDates
-      .filter((d) => d >= firstTxDate && d <= today)
+      .filter((d) => d >= chartStart && d <= today)
       .map((date) => {
         let totalValue = 0;
 
         for (const tx of transactions) {
           const txDate = tx.date.toISOString().split('T')[0];
-          if (txDate > date) continue;
+          const effectiveTxDate = txDate <= lastValuationDate ? txDate : lastValuationDate;
+          if (effectiveTxDate > date) continue;
 
           for (const alloc of tx.allocations) {
             const fund = fundMap.get(alloc.fundIsin);

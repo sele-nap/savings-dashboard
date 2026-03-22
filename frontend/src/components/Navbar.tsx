@@ -1,10 +1,19 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import api from '@/lib/axios';
 
 export default function Navbar() {
   const pathname = usePathname();
+  const router = useRouter();
+
+  if (pathname === '/login') return null;
+
+  const handleLogout = async () => {
+    await api.post('/auth/logout', {}, { withCredentials: true });
+    router.push('/login');
+  };
 
   return (
     <nav className="bg-white border-b border-gray-200">
@@ -12,16 +21,12 @@ export default function Navbar() {
         <Link href="/" className="text-base font-semibold text-gray-900">
           Mon Épargne
         </Link>
-        <Link
-          href="/deposit"
-          className={`text-sm font-medium px-4 py-2 rounded-lg transition-colors ${
-            pathname === '/deposit'
-              ? 'bg-indigo-600 text-white'
-              : 'bg-indigo-50 text-indigo-600 hover:bg-indigo-100'
-          }`}
+        <button
+          onClick={handleLogout}
+          className="text-sm text-gray-500 hover:text-gray-900 transition-colors"
         >
-          + Déposer
-        </Link>
+          Déconnexion
+        </button>
       </div>
     </nav>
   );

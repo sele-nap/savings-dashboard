@@ -4,11 +4,14 @@ import Fund from '../models/Fund';
 
 dotenv.config();
 
+const LAST_RAW_DATE = new Date('2025-05-30');
+const todayMidnight = new Date();
+todayMidnight.setHours(0, 0, 0, 0);
+const offsetMs = todayMidnight.getTime() - LAST_RAW_DATE.getTime();
+
 const shiftDate = (dateStr: string): string => {
   const date = new Date(dateStr);
-  date.setFullYear(date.getFullYear() + 1);
-  date.setMonth(date.getMonth() - 3);
-  return date.toISOString().split('T')[0];
+  return new Date(date.getTime() + offsetMs).toISOString().split('T')[0];
 };
 
 const rawFunds = [

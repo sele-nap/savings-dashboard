@@ -27,8 +27,8 @@ export default function ConfirmationStep() {
       await mutate('/transactions');
       await mutate('/portfolio/summary');
       await mutate('/portfolio/history');
-      dispatch(resetDeposit());
       router.push('/');
+      dispatch(resetDeposit());
     } catch {
       setError(t('error'));
     } finally {

@@ -29,8 +29,10 @@ npm install
 Create a `.env` file in `/backend`:
 
 ```env
-MONGODB_URI=mongodb://localhost:27017/dashboard-epargne
+MONGODB_URI=mongodb://localhost:27017/savings-dashboard
 PORT=5001
+# Optionnel — origines CORS séparées par des virgules (défaut : http://localhost:3000)
+# CORS_ORIGIN=http://localhost:3000,http://192.168.1.xx:3000
 ```
 
 Create a `.env.local` file in `/frontend`:

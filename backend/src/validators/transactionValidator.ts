@@ -8,6 +8,7 @@ export const transactionSchema = Joi.object({
   bic: Joi.string()
     .pattern(/^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$/)
     .required(),
+  date: Joi.date().iso().max('now').optional(),
   allocations: Joi.array()
     .items(
       Joi.object({

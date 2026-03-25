@@ -13,8 +13,8 @@ export const getTransactions = async (req: Request, res: Response): Promise<void
 
 export const createTransaction = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { amount, rib, bic, allocations } = req.body;
-    const transactionDate = new Date();
+    const { amount, rib, bic, allocations, date } = req.body;
+    const transactionDate = date ? new Date(date) : new Date();
     const dateStr = transactionDate.toISOString().split('T')[0];
 
     const totalPercent = allocations.reduce(

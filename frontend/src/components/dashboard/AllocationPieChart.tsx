@@ -1,6 +1,6 @@
 'use client';
 
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
 import { useTranslations } from 'next-intl';
 import { usePortfolioSummary } from '@/hooks/usePortfolio';
 import { motion } from 'framer-motion';
@@ -40,7 +40,7 @@ export default function AllocationPieChart() {
       className="rounded-2xl bg-white p-6 shadow-sm"
     >
       <h2 className="text-sm font-semibold text-gray-700 mb-4">{t('allocation')}</h2>
-      <ResponsiveContainer width="100%" height={220}>
+      <ResponsiveContainer width="100%" height={200}>
         <PieChart>
           <Pie
             data={data}
@@ -61,9 +61,20 @@ export default function AllocationPieChart() {
             }
             contentStyle={{ fontSize: 12, borderRadius: 8 }}
           />
-          <Legend iconType="circle" iconSize={8} wrapperStyle={{ fontSize: 11 }} />
         </PieChart>
       </ResponsiveContainer>
+
+      <div className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2">
+        {data.map((entry, index) => (
+          <div key={index} className="flex items-center gap-2 min-w-0">
+            <span
+              className="shrink-0 h-2.5 w-2.5 rounded-full"
+              style={{ backgroundColor: COLORS[index % COLORS.length] }}
+            />
+            <span className="truncate text-xs text-gray-600">{entry.name}</span>
+          </div>
+        ))}
+      </div>
     </motion.div>
   );
 }

@@ -9,10 +9,18 @@ const fmt = (n: number) =>
 
 export default function TotalSavings() {
   const t = useTranslations('dashboard');
-  const { summary, isLoading } = usePortfolioSummary();
+  const { summary, isLoading, error } = usePortfolioSummary();
 
   if (isLoading) {
     return <div className="rounded-2xl bg-white p-6 shadow-sm animate-pulse h-36" />;
+  }
+
+  if (error) {
+    return (
+      <div className="rounded-2xl bg-red-50 border border-red-200 p-6 text-center text-red-500 text-sm">
+        {t('loadingError')}
+      </div>
+    );
   }
 
   const isPositive = (summary?.performancePercent ?? 0) >= 0;

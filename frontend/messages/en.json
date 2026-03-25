@@ -17,6 +17,7 @@
     "currentSavings": "Current savings",
     "invested": "Invested",
     "noData": "No investments yet.",
+    "loadingError": "Failed to load. Please try again.",
     "evolution": "Savings evolution",
     "value": "Value",
     "allocation": "Fund allocation",

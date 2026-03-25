@@ -13,11 +13,19 @@ const fmtDate = (d: string) =>
 
 export default function TransactionHistory() {
   const t = useTranslations('dashboard');
-  const { transactions, isLoading } = useTransactions();
+  const { transactions, isLoading, error } = useTransactions();
   const [openId, setOpenId] = useState<string | null>(null);
 
   if (isLoading) {
     return <div className="rounded-2xl bg-white p-6 shadow-sm animate-pulse h-40" />;
+  }
+
+  if (error) {
+    return (
+      <div className="rounded-2xl bg-red-50 border border-red-200 p-6 text-center text-red-500 text-sm">
+        {t('loadingError')}
+      </div>
+    );
   }
 
   if (transactions.length === 0) {

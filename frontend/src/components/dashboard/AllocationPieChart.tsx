@@ -12,10 +12,18 @@ const COLORS = [
 
 export default function AllocationPieChart() {
   const t = useTranslations('dashboard');
-  const { summary, isLoading } = usePortfolioSummary();
+  const { summary, isLoading, error } = usePortfolioSummary();
 
   if (isLoading) {
     return <div className="rounded-2xl bg-white p-6 shadow-sm animate-pulse h-64" />;
+  }
+
+  if (error) {
+    return (
+      <div className="rounded-2xl bg-red-50 border border-red-200 p-6 flex items-center justify-center h-64 text-red-500 text-sm">
+        {t('loadingError')}
+      </div>
+    );
   }
 
   const breakdown = summary?.fundBreakdown ?? {};

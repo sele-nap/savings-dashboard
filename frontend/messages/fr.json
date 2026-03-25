@@ -17,6 +17,7 @@
     "currentSavings": "Épargne actuelle",
     "invested": "Investi",
     "noData": "Aucun investissement pour le moment.",
+    "loadingError": "Erreur de chargement. Veuillez réessayer.",
     "evolution": "Évolution de l'épargne",
     "value": "Valeur",
     "allocation": "Répartition des fonds",

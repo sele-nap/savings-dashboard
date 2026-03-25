@@ -7,8 +7,13 @@ const api = axios.create({
 
 api.interceptors.response.use(
   (response) => response,
-  (error) => {
+  async (error) => {
     if (error.response?.status === 401 && typeof window !== 'undefined') {
+      try {
+        await api.post('/auth/logout');
+      } catch {
+        // cookie already invalid, ignore
+      }
       window.location.href = '/login';
     }
     return Promise.reject(error);

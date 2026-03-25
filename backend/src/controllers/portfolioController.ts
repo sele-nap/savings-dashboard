@@ -11,9 +11,9 @@ const getValuationAtDate = (
   return match ? match.value : null;
 };
 
-export const getPortfolioSummary = async (_req: Request, res: Response): Promise<void> => {
+export const getPortfolioSummary = async (req: Request, res: Response): Promise<void> => {
   try {
-    const transactions = await Transaction.find();
+    const transactions = await Transaction.find({ userId: req.user!._id });
     const funds = await Fund.find();
     const today = new Date().toISOString().split('T')[0];
 
@@ -56,9 +56,9 @@ export const getPortfolioSummary = async (_req: Request, res: Response): Promise
   }
 };
 
-export const getPortfolioHistory = async (_req: Request, res: Response): Promise<void> => {
+export const getPortfolioHistory = async (req: Request, res: Response): Promise<void> => {
   try {
-    const transactions = await Transaction.find().sort({ date: 1 });
+    const transactions = await Transaction.find({ userId: req.user!._id }).sort({ date: 1 });
     if (transactions.length === 0) {
       res.json([]);
       return;

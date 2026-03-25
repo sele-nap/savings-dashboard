@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema, Document, Types } from 'mongoose';
 
 export interface IAllocation {
   fundIsin: string;
@@ -9,6 +9,7 @@ export interface IAllocation {
 }
 
 export interface ITransaction extends Document {
+  userId: Types.ObjectId;
   amount: number;
   rib: string;
   bic: string;
@@ -26,6 +27,7 @@ const AllocationSchema = new Schema<IAllocation>({
 
 const TransactionSchema = new Schema<ITransaction>(
   {
+    userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     amount: { type: Number, required: true },
     rib: { type: String, required: true },
     bic: { type: String, required: true },

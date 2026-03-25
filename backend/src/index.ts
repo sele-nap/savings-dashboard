@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
+import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 
 import connectDB from './config/db';
@@ -25,6 +26,7 @@ app.use(
   })
 );
 
+app.use(cookieParser());
 app.use(express.json());
 
 app.use('/api/auth', authRouter);

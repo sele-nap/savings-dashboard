@@ -17,7 +17,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     return;
   }
 
-  res.cookie('auth_session', '1', {
+  res.cookie('auth_session', user._id.toString(), {
     httpOnly: true,
     sameSite: 'lax',
     maxAge: 7 * 24 * 60 * 60 * 1000,

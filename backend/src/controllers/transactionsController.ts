@@ -2,9 +2,9 @@ import { Request, Response } from 'express';
 import Fund from '../models/Fund';
 import Transaction from '../models/Transaction';
 
-export const getTransactions = async (_req: Request, res: Response): Promise<void> => {
+export const getTransactions = async (req: Request, res: Response): Promise<void> => {
   try {
-    const transactions = await Transaction.find().sort({ date: -1 });
+    const transactions = await Transaction.find({ userId: req.user!._id }).sort({ date: -1 });
     res.json(transactions);
   } catch (err) {
     res.status(500).json({ message: 'Server error' });
@@ -51,6 +51,7 @@ export const createTransaction = async (req: Request, res: Response): Promise<vo
     );
 
     const transaction = new Transaction({
+      userId: req.user!._id,
       amount,
       rib,
       bic,
